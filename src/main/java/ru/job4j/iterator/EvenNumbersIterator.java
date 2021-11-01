@@ -2,6 +2,7 @@ package ru.job4j.iterator;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
 /**
  * итератор возвращающий только четные цифры
  * @author goncharikvv@gmail.com
@@ -15,6 +16,7 @@ public class EvenNumbersIterator implements Iterator<Integer> {
     public EvenNumbersIterator(int[] data) {
         this.data = data;
     }
+
     /**
      * Метод проверяет есть ли следующий элемент,
      * если элемент нечетный то увеличиваем index на 1
@@ -22,15 +24,13 @@ public class EvenNumbersIterator implements Iterator<Integer> {
      */
     @Override
     public boolean hasNext() {
-        while (index < data.length) {
-            if (data[index] % 2 != 0) {
-                index++;
-            } else {
-                return true;
-            }
+        while (index < data.length && data[index] % 2 != 0) {
+            index++;
         }
-        return false;
+        return index < data.length;
     }
+
+
     /**
      * Метод возвращает следующий элемент
      * @return элемент массива или NoSuchElementException() если элементов нет
