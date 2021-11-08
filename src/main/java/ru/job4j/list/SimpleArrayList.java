@@ -34,15 +34,22 @@ public class SimpleArrayList<T> implements List<T> {
     }
 
     /**
+     * Метод расширяет массив при наполнении
+     */
+    public void expansionArray() {
+        if (size == container.length) {
+            container = Arrays.copyOf(container, container.length * 2);
+        }
+    }
+
+    /**
      * Метод добавляет эл-т в массив
      *
      * @param value - эл
      */
     @Override
     public void add(T value) {
-        if (size == container.length) {
-            container = Arrays.copyOf(container, container.length * 2);
-        }
+        expansionArray();
         container[size++] = value;
         modCount++;
     }
@@ -56,8 +63,7 @@ public class SimpleArrayList<T> implements List<T> {
      */
     @Override
     public T set(int index, T newValue) {
-        Objects.checkIndex(index, container.length);
-        T value = container[index];
+        T value = get(index);
         container[index] = newValue;
         return value;
     }
@@ -70,8 +76,7 @@ public class SimpleArrayList<T> implements List<T> {
      */
     @Override
     public T remove(int index) {
-        Objects.checkIndex(index, container.length);
-        T value = container[index];
+        T value = get(index);
         System.arraycopy(
                 container,
                 index + 1,
@@ -79,7 +84,7 @@ public class SimpleArrayList<T> implements List<T> {
                 index,
                 container.length - index - 1
         );
-        container[container.length - 1] = null;
+        container[size - 1] = null;
         size--;
         modCount++;
         return value;
@@ -93,7 +98,7 @@ public class SimpleArrayList<T> implements List<T> {
      */
     @Override
     public T get(int index) {
-        Objects.checkIndex(index, container.length);
+        Objects.checkIndex(index, size);
         return container[index];
     }
 
