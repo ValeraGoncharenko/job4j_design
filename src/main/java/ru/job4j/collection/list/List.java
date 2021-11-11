@@ -1,4 +1,4 @@
-package ru.job4j.linkedList;
+package ru.job4j.collection.list;
 
 /**
  * Реализуем двусвязный список
