@@ -28,6 +28,13 @@ public class ForwardLinked<T> implements Iterable<T> {
     }
 
     /**
+     * Метод добавляет первый эл-т в связанный список
+     */
+    public void addFirst(T value) {
+        head = new Node<T>(value, head);
+    }
+
+    /**
      * Метод удаляет первый элемент из связанного списка
      *
      * @return возвращает значение удаленного элемента связанного списка
