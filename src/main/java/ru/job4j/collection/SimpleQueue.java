@@ -1,5 +1,7 @@
 package ru.job4j.collection;
 
+import java.util.NoSuchElementException;
+
 /**
  * реализация очереди на двух стеках
  */
@@ -22,6 +24,9 @@ public class SimpleQueue<T> {
      * Метод возвращает первое значение и удаляет его
      */
     public T poll() {
+        if (countIn == 0 && countOut == 0) {
+            throw new NoSuchElementException();
+        }
         if (countOut != countIn) {
             while (countIn != 0) {
                 out.push(in.pop());
