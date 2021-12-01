@@ -50,6 +50,26 @@ public class ForwardLinked<T> implements Iterable<T> {
     }
 
     /**
+     * Метод переворачивает односвязный список
+     *
+     * @return boolean
+     */
+    public boolean revert() {
+        boolean result = false;
+        if (head != null && head.next != null) {
+            Node<T> current = head.next;
+            while (current != null) {
+                Node<T> next = current.next;
+                current.next = head;
+                head = current;
+                current = next;
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    /**
      * Итератор
      *
      * @return возвращает элемент
