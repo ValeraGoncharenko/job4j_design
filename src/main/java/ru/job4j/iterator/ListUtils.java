@@ -9,14 +9,7 @@ public class ListUtils {
      */
     public static <T> void addBefore(List<T> list, int index, T value) {
         Objects.checkIndex(index, list.size());
-        ListIterator<T> i = list.listIterator();
-        while (i.hasNext()) {
-            if (i.nextIndex() == index) {
-                i.add(value);
-                break;
-            }
-            i.next();
-        }
+        list.listIterator(index).add(value);
     }
 
     /**
@@ -24,24 +17,17 @@ public class ListUtils {
      */
     public static <T> void addAfter(List<T> list, int index, T value) {
         Objects.checkIndex(index, list.size());
-        ListIterator<T> i = list.listIterator(index + 1);
-        while (i.hasPrevious()) {
-            if (i.previousIndex() == index) {
-                i.add(value);
-                break;
-            }
-            i.previous();
-        }
+        list.listIterator(index + 1).add(value);
     }
 
     /**
      * Метод удаляет все элементы, которые удовлетворяют предикату
      */
     public static <T> void removeIf(List<T> list, Predicate<T> filter) {
-        ListIterator<T> i = list.listIterator();
-        while (i.hasNext()) {
-            if (filter.test(i.next())) {
-                i.remove();
+        ListIterator<T> listIterator = list.listIterator();
+        while (listIterator.hasNext()) {
+            if (filter.test(listIterator.next())) {
+                listIterator.remove();
             }
         }
     }
@@ -50,10 +36,10 @@ public class ListUtils {
      * Метод заменяет все элементы, которые удовлетворяют предикату
      */
     public static <T> void replaceIf(List<T> list, Predicate<T> filter, T value) {
-        ListIterator<T> i = list.listIterator();
-        while (i.hasNext()) {
-            if (filter.test(i.next())) {
-                i.set(value);
+        ListIterator<T> listIterator = list.listIterator();
+        while (listIterator.hasNext()) {
+            if (filter.test(listIterator.next())) {
+                listIterator.set(value);
             }
         }
     }
@@ -62,10 +48,10 @@ public class ListUtils {
      * Метод удаляет из списка те элементы, которые есть в elements
      */
     public static <T> void removeAll(List<T> list, List<T> elements) {
-        ListIterator<T> i = list.listIterator();
-        while (i.hasNext()) {
-            if (elements.contains(i.next())) {
-                i.remove();
+        ListIterator<T> listIterator = list.listIterator();
+        while (listIterator.hasNext()) {
+            if (elements.contains(listIterator.next())) {
+                listIterator.remove();
             }
         }
     }
