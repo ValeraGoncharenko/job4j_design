@@ -36,7 +36,7 @@ public class Main {
 
         System.out.println(userFirst.equals(userSecond));
 
-        System.out.println(binary(1989780873));
-        System.out.println(binary(1480010240));
+        System.out.println(binary(1986118722));
+        System.out.println(binary(1986118722));
     }
 }
