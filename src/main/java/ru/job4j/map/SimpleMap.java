@@ -38,10 +38,10 @@ public class SimpleMap<K, V> implements Map<K, V> {
         MapEntry<K, V>[] tempTable = new MapEntry[capacity];
         for (int i = 0; i < table.length; i++) {
             if (table[i] != null) {
-                tempTable[i] = table[i];
+                tempTable[indexFor(hash((Integer) table[i].key))] = table[i];
             }
         }
-        table = Arrays.copyOf(tempTable, capacity);
+        table = tempTable;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
         return new Iterator<K>() {
             private final int expectedModCount = modCount;
             private int point = 0;
-            private int size = 0;
+
 
             @Override
             public boolean hasNext() {
@@ -88,7 +88,6 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                size++;
                 return table[point++].key;
             }
         };
