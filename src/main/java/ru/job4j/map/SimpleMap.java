@@ -38,7 +38,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
         MapEntry<K, V>[] tempTable = new MapEntry[capacity];
         for (int i = 0; i < table.length; i++) {
             if (table[i] != null) {
-                tempTable[indexFor(hash((Integer) table[i].key))] = table[i];
+                tempTable[indexFor(hash(table[i].key.hashCode()))] = table[i];
             }
         }
         table = tempTable;
